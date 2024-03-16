@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  mongodb:
+    image: mongo:6-jammy
+    container_name: mongodb
+    ports:
+      - '27017:27017'
+    volumes:
+      - dbdata:/mongodata/db
+    networks:
+      - security-example
+
+volumes:
+  dbdata:
+    name: db_data
+
+networks:
+  security-example:
+    name: security-example-net

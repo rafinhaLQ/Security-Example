@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+  security-example-api:
+    build: .
+    image: security-example-api:v1
+    container_name: security-example-api
+    environment:
+      MONGO_HOST: mongodb
+      SECRET_KEY: jxgEQeXHuPq8VdbyYFNkANdudQ53YUn4
+      TOKEN_EXPIRATION: 3600000
+    ports:
+      - 8080:8080
+    depends_on:
+      - mongodb
+    networks:
+      - security-example
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 5
+
+  mongodb:
+    image: mongo:6-jammy
+    container_name: mongodb
+    volumes:
+      - dbdata:/mongodata/db
+    networks:
+      - security-example
+
+volumes:
+  dbdata:
+    name: db_data
+
+networks:
+  security-example:
+    name: security-example-net

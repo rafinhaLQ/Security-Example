@@ -1,0 +1,48 @@
+info:
+  app:
+    name: "@project.name@"
+    version: "@project.version@"
+
+server:
+  port: "8080"
+  servlet:
+    context-path: /api/let-go
+
+spring:
+  application:
+    name: security-example-api
+  data:
+    mongodb:
+      host: ${MONGO_HOST:localhost}
+      port: 27017
+      database: securityExampledb
+  cloud:
+    openfeign:
+      client:
+        config:
+          default:
+            loggerLevel: full
+  security:
+    user:
+      name: XXX
+      password: XXX
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+    com:
+      github:
+        rafinhalq:
+          letgoapi: DEBUG
+
+springdoc:
+  swagger-ui:
+    path: /docs.html
+  api-docs:
+    path: /docs-json
+
+jwt:
+  secret-key: ${SECRET_KEY:jxgEQeXHuPq8VdbyYFNkANdudQ53YUn4}
+  expiration: ${TOKEN_EXPIRATION:3600000}
